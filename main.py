@@ -1,4 +1,3 @@
-import os
 import glob
 import pandas as pd
 from fpdf import FPDF
@@ -40,6 +39,17 @@ for file in filepath:
         pdf.cell(w=50, h=8, txt=f"{row["price_per_unit"]}", align="L", border=1)
         pdf.cell(w=50, h=8, txt=f"{row["total_price"]}", ln=1, align="L", border=1)
 
+    #total price
+    totalsum = df["total_price"].sum()
+    pdf.set_font("Arial", size=12, style="B")
+    pdf.cell(w=50, h=8, txt=f"", align="L", border=1)
+    pdf.cell(w=70, h=8, txt=f"", align="L", border=1)
+    pdf.cell(w=50, h=8, txt=f"", align="L", border=1)
+    pdf.cell(w=50, h=8, txt=f"", align="L", border=1)
+    pdf.cell(w=50, h=8, txt=f"{totalsum}", ln=1, align="L", border=1)
 
-    pdf.output(f"PDF/{fname}.pdf")
-    print(df)
+    pdf.cell(w=50, h=8, txt=f"Total Sales is : {totalsum}", ln=1, align="L")
+    pdf.cell(w=50, h=8, txt=f"Gwaliwa's", align="L")
+    pdf.image("PythonHow/icon.png", w=10)
+
+    pdf.output(f"PDFs/{fname}.pdf")
